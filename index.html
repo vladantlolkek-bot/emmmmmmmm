@@ -43,17 +43,6 @@
             to { opacity: 1; }
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .animate-on-scroll {
             opacity: 0;
             transition: all 0.8s ease;
@@ -562,21 +551,9 @@
                 text-align: center;
             }
         }
-
-        [data-lang="be"] .lang-ru,
-        [data-lang="ru"] .lang-be {
-            display: none;
-        }
-        [data-lang="ru"] .lang-ru,
-        [data-lang="be"] .lang-be {
-            display: inline-block;
-        }
-        .lang-be, .lang-ru {
-            transition: all 0.2s;
-        }
     </style>
 </head>
-<body data-lang="ru">
+<body>
     <div class="container">
         <!-- ШАПКА -->
         <header class="header">
@@ -585,47 +562,36 @@
                 <h1>PRODAM</h1>
             </div>
             <nav class="nav">
-                <a href="#how" class="lang-ru">Как это работает</a>
-                <a href="#how" class="lang-be">Як гэта працуе</a>
-                <a href="#features" class="lang-ru">Преимущества</a>
-                <a href="#features" class="lang-be">Перавагі</a>
-                <a href="#pricing" class="lang-ru">Тарифы</a>
-                <a href="#pricing" class="lang-be">Тарифы</a>
-                <a href="#contacts" class="lang-ru">Контакты</a>
-                <a href="#contacts" class="lang-be">Кантакты</a>
+                <a href="#how" id="nav-how"></a>
+                <a href="#features" id="nav-features"></a>
+                <a href="#pricing" id="nav-pricing"></a>
+                <a href="#contacts" id="nav-contacts"></a>
                 <div class="lang-switch">
                     <button class="lang-btn" data-lang="ru">Рус</button>
                     <button class="lang-btn" data-lang="be">Бел</button>
                 </div>
             </nav>
-            <a href="#" class="btn-outline btn lang-ru">Войти</a>
-            <a href="#" class="btn-outline btn lang-be">Увайсці</a>
+            <a href="#" class="btn-outline btn" id="login-btn"></a>
         </header>
 
         <!-- ГЕРОЙ -->
         <section class="hero">
             <div class="hero-content">
-                <h2 class="lang-ru">Продай авто как дилер<br>без опыта и хлопот</h2>
-                <h2 class="lang-be">Продай аўто як дылер<br>без досведу і клопату</h2>
-                <p class="lang-ru">AI-ассистент сделает идеальное объявление, разместит на 5 площадках и ответит на звонки. Вы просто получаете деньги.</p>
-                <p class="lang-be">AI-асістэнт зробіць ідэальнае абʼяву, размясціць на 5 пляцоўках і адкажа на званкі. Вы проста атрымліваеце грошы.</p>
-                <a href="#" class="btn lang-ru">Начать бесплатно</a>
-                <a href="#" class="btn lang-be">Пачаць бясплатна</a>
+                <h2 id="hero-title"></h2>
+                <p id="hero-description"></p>
+                <a href="#" class="btn" id="hero-btn"></a>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <h3>250+</h3>
-                        <p class="lang-ru">авто продано</p>
-                        <p class="lang-be">аўто прададзена</p>
+                        <p id="stat-sold"></p>
                     </div>
                     <div class="stat-item">
                         <h3>4.9</h3>
-                        <p class="lang-ru">рейтинг пользователей</p>
-                        <p class="lang-be">рэйтынг карыстальнікаў</p>
+                        <p id="stat-rating"></p>
                     </div>
                     <div class="stat-item">
                         <h3>15%</h3>
-                        <p class="lang-ru">дороже продажа</p>
-                        <p class="lang-be">даражэйшая продаж</p>
+                        <p id="stat-price"></p>
                     </div>
                 </div>
             </div>
@@ -637,176 +603,128 @@
 
         <!-- КАК ЭТО РАБОТАЕТ -->
         <section id="how" class="section">
-            <h2 class="section-title lang-ru">Как это работает?</h2>
-            <h2 class="section-title lang-be">Як гэта працуе?</h2>
-            <p class="section-subtitle lang-ru">3 минуты — и ваше авто готово к продаже</p>
-            <p class="section-subtitle lang-be">3 хвіліны — і ваша аўто гатова да продажу</p>
+            <h2 class="section-title" id="how-title"></h2>
+            <p class="section-subtitle" id="how-subtitle"></p>
             <div class="steps">
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">1</div>
-                    <h3 class="lang-ru">Введите данные</h3>
-                    <h3 class="lang-be">Увядзіце даныя</h3>
-                    <p class="lang-ru">Марка, модель, год, состояние. Это займёт 3 минуты.</p>
-                    <p class="lang-be">Марка, мадэль, год, стан. Гэта займае 3 хвіліны.</p>
+                    <h3 id="step1-title"></h3>
+                    <p id="step1-desc"></p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">2</div>
-                    <h3 class="lang-ru">AI создаст контент</h3>
-                    <h3 class="lang-be">AI створыць кантэнт</h3>
-                    <p class="lang-ru">Текст, фото-гайд, список минусов — всё само.</p>
-                    <p class="lang-be">Тэкст, фота-гайд, спіс мінусаў — усё само.</p>
+                    <h3 id="step2-title"></h3>
+                    <p id="step2-desc"></p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">3</div>
-                    <h3 class="lang-ru">Одна кнопка публикации</h3>
-                    <h3 class="lang-be">Адна кнопка публікацыі</h3>
-                    <p class="lang-ru">ABW, Onliner, Kufar, Telegram, VK — сразу везде.</p>
-                    <p class="lang-be">ABW, Onliner, Kufar, Telegram, VK — адразу ўсюды.</p>
+                    <h3 id="step3-title"></h3>
+                    <p id="step3-desc"></p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-number">4</div>
-                    <h3 class="lang-ru">AI отвечает за вас</h3>
-                    <h3 class="lang-be">AI адказвае за вас</h3>
-                    <p class="lang-ru">Чат-бот отсеет перекупов и даст контакты реальных покупателей.</p>
-                    <p class="lang-be">Чат-бот адсеіць перакупаў і дасць кантакты рэальных пакупнікоў.</p>
+                    <h3 id="step4-title"></h3>
+                    <p id="step4-desc"></p>
                 </div>
             </div>
         </section>
 
         <!-- ПРЕИМУЩЕСТВА -->
         <section id="features" class="section">
-            <h2 class="section-title lang-ru">Почему PRODAM?</h2>
-            <h2 class="section-title lang-be">Чаму PRODAM?</h2>
-            <p class="section-subtitle lang-ru">Мы сделали всё, чтобы вы продали машину быстро и дорого</p>
-            <p class="section-subtitle lang-be">Мы зрабілі ўсё, каб вы прадалі машыну хутка і дорага</p>
+            <h2 class="section-title" id="features-title"></h2>
+            <p class="section-subtitle" id="features-subtitle"></p>
             <div class="features">
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🤖</span>
-                    <h3 class="lang-ru">Нейросеть пишет текст</h3>
-                    <h3 class="lang-be">Нейрасетка піша тэкст</h3>
-                    <p class="lang-ru">3 варианта: сухой, эмоциональный, технический. Для каждой модели свои фишки.</p>
-                    <p class="lang-be">3 варыянты на выбар: сухі, эмацыйны, тэхнічны. Для кожнай мадэлі свае фішкі.</p>
+                    <h3 id="feature1-title"></h3>
+                    <p id="feature1-desc"></p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">📸</span>
-                    <h3 class="lang-ru">Гайд по фото</h3>
-                    <h3 class="lang-be">Гайд па фота</h3>
-                    <p class="lang-ru">Пошаговая инструкция: "отойди на 3 метра, присядь, сфотографируй этот ракурс".</p>
-                    <p class="lang-be">Пакрокавая інструкцыя: "адыйдзі на 3 метры, прысядзь, сфатаграфуй гэты ракурс".</p>
+                    <h3 id="feature2-title"></h3>
+                    <p id="feature2-desc"></p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">🛡️</span>
-                    <h3 class="lang-ru">Честные минусы</h3>
-                    <h3 class="lang-be">Чэсныя мінусы</h3>
-                    <p class="lang-ru">Не дадим перекупам сбить цену — сразу покажите реальное состояние.</p>
-                    <p class="lang-be">Не дамо перакупам збіць цану — адразу пакажыце рэальны стан.</p>
+                    <h3 id="feature3-title"></h3>
+                    <p id="feature3-desc"></p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">📢</span>
-                    <h3 class="lang-ru">Автопостинг</h3>
-                    <h3 class="lang-be">Аўтапостынг</h3>
-                    <p class="lang-ru">Одна кнопка — и объявление на ABW, Onliner, Kufar, AV.BY, в Telegram и VK.</p>
-                    <p class="lang-be">Адна кнопка — і аб'ява на ABW, Onliner, Kufar, AV.BY, у Telegram і VK.</p>
+                    <h3 id="feature4-title"></h3>
+                    <p id="feature4-desc"></p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">💬</span>
-                    <h3 class="lang-ru">AI-ассистент</h3>
-                    <h3 class="lang-be">AI-асістэнт</h3>
-                    <p class="lang-ru">Отвечает на вопросы в Viber, Telegram, отсеивает "салам алейкум, обменяюсь".</p>
-                    <p class="lang-be">Адказвае на пытанні ў Viber, Telegram, адсявае "салам алейкум, памяняюся".</p>
+                    <h3 id="feature5-title"></h3>
+                    <p id="feature5-desc"></p>
                 </div>
                 <div class="feature-card animate-on-scroll">
                     <span class="feature-icon">📊</span>
-                    <h3 class="lang-ru">Аналитика</h3>
-                    <h3 class="lang-be">Аналітыка</h3>
-                    <p class="lang-ru">Видите, сколько людей смотрели, добавили в избранное, когда снизить цену.</p>
-                    <p class="lang-be">Бачыце, колькі людзей глядзелі, дадалі ў абранае, калі панізіць цану.</p>
+                    <h3 id="feature6-title"></h3>
+                    <p id="feature6-desc"></p>
                 </div>
             </div>
         </section>
 
         <!-- ТАРИФЫ -->
         <section id="pricing" class="section">
-            <h2 class="section-title lang-ru">Тарифы</h2>
-            <h2 class="section-title lang-be">Тарифы</h2>
-            <p class="section-subtitle lang-ru">Выберите план, который подходит именно вам</p>
-            <p class="section-subtitle lang-be">Абярыце план, які падыходзіць менавіта вам</p>
+            <h2 class="section-title" id="pricing-title"></h2>
+            <p class="section-subtitle" id="pricing-subtitle"></p>
             <div class="pricing">
                 <div class="pricing-card animate-on-scroll">
                     <h3>Free</h3>
                     <div class="price">0 <small>BYN</small></div>
                     <ul class="pricing-features">
-                        <li class="lang-ru">Генерация текста</li>
-                        <li class="lang-be">Генерацыя тэксту</li>
-                        <li class="lang-ru">Чек-лист фото</li>
-                        <li class="lang-be">Чэк-ліст фота</li>
-                        <li class="lang-ru">1 площадка на выбор</li>
-                        <li class="lang-be">1 пляцоўка на выбар</li>
+                        <li id="free1"></li>
+                        <li id="free2"></li>
+                        <li id="free3"></li>
                         <li>—</li>
                         <li>—</li>
                     </ul>
-                    <a href="#" class="btn-outline btn lang-ru">Начать</a>
-                    <a href="#" class="btn-outline btn lang-be">Пачаць</a>
+                    <a href="#" class="btn-outline btn" id="free-btn"></a>
                 </div>
                 <div class="pricing-card popular animate-on-scroll">
                     <h3>Standard</h3>
                     <div class="price">29 <small>BYN</small></div>
                     <ul class="pricing-features">
-                        <li class="lang-ru">Всё из Free</li>
-                        <li class="lang-be">Усё з Free</li>
-                        <li class="lang-ru">5 площадок</li>
-                        <li class="lang-be">5 пляцовак</li>
-                        <li class="lang-ru">Честные минусы</li>
-                        <li class="lang-be">Чэсныя мінусы</li>
-                        <li class="lang-ru">Статистика просмотров</li>
-                        <li class="lang-be">Статыстыка праглядаў</li>
+                        <li id="std1"></li>
+                        <li id="std2"></li>
+                        <li id="std3"></li>
+                        <li id="std4"></li>
                     </ul>
-                    <a href="#" class="btn lang-ru">Выбрать</a>
-                    <a href="#" class="btn lang-be">Абраць</a>
+                    <a href="#" class="btn" id="std-btn"></a>
                 </div>
                 <div class="pricing-card animate-on-scroll">
                     <h3>Premium</h3>
                     <div class="price">59 <small>BYN</small></div>
                     <ul class="pricing-features">
-                        <li class="lang-ru">Всё из Standard</li>
-                        <li class="lang-be">Усё са Standard</li>
-                        <li class="lang-ru">AI-ассистент 24/7</li>
-                        <li class="lang-be">AI-асістэнт 24/7</li>
-                        <li class="lang-ru">Анализ рынка</li>
-                        <li class="lang-be">Аналіз рынку</li>
-                        <li class="lang-ru">Рекомендация цены</li>
-                        <li class="lang-be">Рэкамендацыя цэн</li>
+                        <li id="prem1"></li>
+                        <li id="prem2"></li>
+                        <li id="prem3"></li>
+                        <li id="prem4"></li>
                     </ul>
-                    <a href="#" class="btn-outline btn lang-ru">Выбрать</a>
-                    <a href="#" class="btn-outline btn lang-be">Абраць</a>
+                    <a href="#" class="btn-outline btn" id="prem-btn"></a>
                 </div>
                 <div class="pricing-card animate-on-scroll">
                     <h3>VIP</h3>
                     <div class="price">149 <small>BYN</small></div>
                     <ul class="pricing-features">
-                        <li class="lang-ru">Пакет на 10 авто</li>
-                        <li class="lang-be">Пакет на 10 аўто</li>
-                        <li class="lang-ru">Мультиаккаунтинг</li>
-                        <li class="lang-be">Мультыакаўнтынг</li>
-                        <li class="lang-ru">Загрузка по FTP</li>
-                        <li class="lang-be">Загрузка па FTP</li>
-                        <li class="lang-ru">API доступ</li>
-                        <li class="lang-be">API доступ</li>
+                        <li id="vip1"></li>
+                        <li id="vip2"></li>
+                        <li id="vip3"></li>
+                        <li id="vip4"></li>
                     </ul>
-                    <a href="#" class="btn-outline btn lang-ru">Выбрать</a>
-                    <a href="#" class="btn-outline btn lang-be">Абраць</a>
+                    <a href="#" class="btn-outline btn" id="vip-btn"></a>
                 </div>
             </div>
         </section>
 
         <!-- CTA -->
         <section class="cta animate-on-scroll">
-            <h2 class="lang-ru">Получите первое объявление бесплатно</h2>
-            <h2 class="lang-be">Атрымайце першае абʼяву бясплатна</h2>
-            <p class="lang-ru">Прямо сейчас — без оплаты, без карты, без телефона. Попробуйте, как это просто.</p>
-            <p class="lang-be">Проста зараз — без аплаты, без карты, без тэлефона. Паспрабуйце, як гэта проста.</p>
-            <a href="#" class="btn lang-ru">Создать объявление</a>
-            <a href="#" class="btn lang-be">Стварыць абʼяву</a>
+            <h2 id="cta-title"></h2>
+            <p id="cta-desc"></p>
+            <a href="#" class="btn" id="cta-btn"></a>
         </section>
 
         <!-- ФУТЕР -->
@@ -816,29 +734,186 @@
                 <h1>PRODAM</h1>
             </div>
             <div class="footer-links">
-                <a href="#" class="lang-ru">О нас</a>
-                <a href="#" class="lang-be">Пра нас</a>
-                <a href="#" class="lang-ru">Помощь</a>
-                <a href="#" class="lang-be">Дапамога</a>
-                <a href="#" class="lang-ru">Договор оферты</a>
-                <a href="#" class="lang-be">Дагавор аферты</a>
-                <a href="#" class="lang-ru">Контакты</a>
-                <a href="#" class="lang-be">Кантакты</a>
+                <a href="#" id="footer-about"></a>
+                <a href="#" id="footer-help"></a>
+                <a href="#" id="footer-offer"></a>
+                <a href="#" id="footer-contacts"></a>
             </div>
-            <div class="lang-ru">© 2026 PRODAM. Все права защищены.</div>
-            <div class="lang-be">© 2026 PRODAM. Усе правы абаронены.</div>
+            <div id="footer-copyright"></div>
         </footer>
     </div>
 
     <!-- СКРИПТ -->
     <script>
+        // Словарь с переводами
+        const translations = {
+            ru: {
+                // Навигация
+                'nav-how': 'Как это работает',
+                'nav-features': 'Преимущества',
+                'nav-pricing': 'Тарифы',
+                'nav-contacts': 'Контакты',
+                'login-btn': 'Войти',
+                
+                // Герой
+                'hero-title': 'Продай авто как дилер<br>без опыта и хлопот',
+                'hero-description': 'AI-ассистент сделает идеальное объявление, разместит на 5 площадках и ответит на звонки. Вы просто получаете деньги.',
+                'hero-btn': 'Начать бесплатно',
+                'stat-sold': 'авто продано',
+                'stat-rating': 'рейтинг пользователей',
+                'stat-price': 'дороже продажа',
+                
+                // Как это работает
+                'how-title': 'Как это работает?',
+                'how-subtitle': '3 минуты — и ваше авто готово к продаже',
+                'step1-title': 'Введите данные',
+                'step1-desc': 'Марка, модель, год, состояние. Это займёт 3 минуты.',
+                'step2-title': 'AI создаст контент',
+                'step2-desc': 'Текст, фото-гайд, список минусов — всё само.',
+                'step3-title': 'Одна кнопка публикации',
+                'step3-desc': 'ABW, Onliner, Kufar, Telegram, VK — сразу везде.',
+                'step4-title': 'AI отвечает за вас',
+                'step4-desc': 'Чат-бот отсеет перекупов и даст контакты реальных покупателей.',
+                
+                // Преимущества
+                'features-title': 'Почему PRODAM?',
+                'features-subtitle': 'Мы сделали всё, чтобы вы продали машину быстро и дорого',
+                'feature1-title': 'Нейросеть пишет текст',
+                'feature1-desc': '3 варианта: сухой, эмоциональный, технический. Для каждой модели свои фишки.',
+                'feature2-title': 'Гайд по фото',
+                'feature2-desc': 'Пошаговая инструкция: "отойди на 3 метра, присядь, сфотографируй этот ракурс".',
+                'feature3-title': 'Честные минусы',
+                'feature3-desc': 'Не дадим перекупам сбить цену — сразу покажите реальное состояние.',
+                'feature4-title': 'Автопостинг',
+                'feature4-desc': 'Одна кнопка — и объявление на ABW, Onliner, Kufar, AV.BY, в Telegram и VK.',
+                'feature5-title': 'AI-ассистент',
+                'feature5-desc': 'Отвечает на вопросы в Viber, Telegram, отсеивает "салам алейкум, обменяюсь".',
+                'feature6-title': 'Аналитика',
+                'feature6-desc': 'Видите, сколько людей смотрели, добавили в избранное, когда снизить цену.',
+                
+                // Тарифы
+                'pricing-title': 'Тарифы',
+                'pricing-subtitle': 'Выберите план, который подходит именно вам',
+                'free1': 'Генерация текста',
+                'free2': 'Чек-лист фото',
+                'free3': '1 площадка на выбор',
+                'free-btn': 'Начать',
+                'std1': 'Всё из Free',
+                'std2': '5 площадок',
+                'std3': 'Честные минусы',
+                'std4': 'Статистика просмотров',
+                'std-btn': 'Выбрать',
+                'prem1': 'Всё из Standard',
+                'prem2': 'AI-ассистент 24/7',
+                'prem3': 'Анализ рынка',
+                'prem4': 'Рекомендация цены',
+                'prem-btn': 'Выбрать',
+                'vip1': 'Пакет на 10 авто',
+                'vip2': 'Мультиаккаунтинг',
+                'vip3': 'Загрузка по FTP',
+                'vip4': 'API доступ',
+                'vip-btn': 'Выбрать',
+                
+                // CTA
+                'cta-title': 'Получите первое объявление бесплатно',
+                'cta-desc': 'Прямо сейчас — без оплаты, без карты, без телефона. Попробуйте, как это просто.',
+                'cta-btn': 'Создать объявление',
+                
+                // Футер
+                'footer-about': 'О нас',
+                'footer-help': 'Помощь',
+                'footer-offer': 'Договор оферты',
+                'footer-contacts': 'Контакты',
+                'footer-copyright': '© 2026 PRODAM. Все права защищены.'
+            },
+            be: {
+                // Навігацыя
+                'nav-how': 'Як гэта працуе',
+                'nav-features': 'Перавагі',
+                'nav-pricing': 'Тарифы',
+                'nav-contacts': 'Кантакты',
+                'login-btn': 'Увайсці',
+                
+                // Герой
+                'hero-title': 'Продай аўто як дылер<br>без досведу і клопату',
+                'hero-description': 'AI-асістэнт зробіць ідэальнае абʼяву, размясціць на 5 пляцоўках і адкажа на званкі. Вы проста атрымліваеце грошы.',
+                'hero-btn': 'Пачаць бясплатна',
+                'stat-sold': 'аўто прададзена',
+                'stat-rating': 'рэйтынг карыстальнікаў',
+                'stat-price': 'даражэйшая продаж',
+                
+                // Як гэта працуе
+                'how-title': 'Як гэта працуе?',
+                'how-subtitle': '3 хвіліны — і ваша аўто гатова да продажу',
+                'step1-title': 'Увядзіце даныя',
+                'step1-desc': 'Марка, мадэль, год, стан. Гэта займае 3 хвіліны.',
+                'step2-title': 'AI створыць кантэнт',
+                'step2-desc': 'Тэкст, фота-гайд, спіс мінусаў — усё само.',
+                'step3-title': 'Адна кнопка публікацыі',
+                'step3-desc': 'ABW, Onliner, Kufar, Telegram, VK — адразу ўсюды.',
+                'step4-title': 'AI адказвае за вас',
+                'step4-desc': 'Чат-бот адсеіць перакупаў і дасць кантакты рэальных пакупнікоў.',
+                
+                // Перавагі
+                'features-title': 'Чаму PRODAM?',
+                'features-subtitle': 'Мы зрабілі ўсё, каб вы прадалі машыну хутка і дорага',
+                'feature1-title': 'Нейрасетка піша тэкст',
+                'feature1-desc': '3 варыянты на выбар: сухі, эмацыйны, тэхнічны. Для кожнай мадэлі свае фішкі.',
+                'feature2-title': 'Гайд па фота',
+                'feature2-desc': 'Пакрокавая інструкцыя: "адыйдзі на 3 метры, прысядзь, сфатаграфуй гэты ракурс".',
+                'feature3-title': 'Чэсныя мінусы',
+                'feature3-desc': 'Не дамо перакупам збіць цану — адразу пакажыце рэальны стан.',
+                'feature4-title': 'Аўтапостынг',
+                'feature4-desc': 'Адна кнопка — і аб\'ява на ABW, Onliner, Kufar, AV.BY, у Telegram і VK.',
+                'feature5-title': 'AI-асістэнт',
+                'feature5-desc': 'Адказвае на пытанні ў Viber, Telegram, адсявае "салам алейкум, памяняюся".',
+                'feature6-title': 'Аналітыка',
+                'feature6-desc': 'Бачыце, колькі людзей глядзелі, дадалі ў абранае, калі панізіць цану.',
+                
+                // Тарифы
+                'pricing-title': 'Тарифы',
+                'pricing-subtitle': 'Абярыце план, які падыходзіць менавіта вам',
+                'free1': 'Генерацыя тэксту',
+                'free2': 'Чэк-ліст фота',
+                'free3': '1 пляцоўка на выбар',
+                'free-btn': 'Пачаць',
+                'std1': 'Усё з Free',
+                'std2': '5 пляцовак',
+                'std3': 'Чэсныя мінусы',
+                'std4': 'Статыстыка праглядаў',
+                'std-btn': 'Абраць',
+                'prem1': 'Усё са Standard',
+                'prem2': 'AI-асістэнт 24/7',
+                'prem3': 'Аналіз рынку',
+                'prem4': 'Рэкамендацыя цэн',
+                'prem-btn': 'Абраць',
+                'vip1': 'Пакет на 10 аўто',
+                'vip2': 'Мультыакаўнтынг',
+                'vip3': 'Загрузка па FTP',
+                'vip4': 'API доступ',
+                'vip-btn': 'Абраць',
+                
+                // CTA
+                'cta-title': 'Атрымайце першае абʼяву бясплатна',
+                'cta-desc': 'Проста зараз — без аплаты, без карты, без тэлефона. Паспрабуйце, як гэта проста.',
+                'cta-btn': 'Стварыць абʼяву',
+                
+                // Футэр
+                'footer-about': 'Пра нас',
+                'footer-help': 'Дапамога',
+                'footer-offer': 'Дагавор аферты',
+                'footer-contacts': 'Кантакты',
+                'footer-copyright': '© 2026 PRODAM. Усе правы абаронены.'
+            }
+        };
+
         // Переключение языка
         const langBtns = document.querySelectorAll('.lang-btn');
-        const root = document.documentElement;
+        let currentLang = localStorage.getItem('prodam-lang') || 'ru';
 
         function setLanguage(lang) {
-            root.setAttribute('data-lang', lang);
-            // обновить активный класс на кнопках
+            currentLang = lang;
+            // Обновить активный класс на кнопках
             langBtns.forEach(btn => {
                 if (btn.dataset.lang === lang) {
                     btn.classList.add('active');
@@ -846,6 +921,21 @@
                     btn.classList.remove('active');
                 }
             });
+            
+            // Обновить все тексты на странице
+            const translationsMap = translations[lang];
+            for (const [key, value] of Object.entries(translationsMap)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    // Для заголовков с HTML (например, <br>)
+                    if (key === 'hero-title' || key.includes('title')) {
+                        element.innerHTML = value;
+                    } else {
+                        element.textContent = value;
+                    }
+                }
+            }
+            
             localStorage.setItem('prodam-lang', lang);
         }
 
@@ -855,9 +945,8 @@
             });
         });
 
-        // загрузить сохранённый язык
-        const savedLang = localStorage.getItem('prodam-lang') || 'ru';
-        setLanguage(savedLang);
+        // Установить начальный язык
+        setLanguage(currentLang);
 
         // анимации при скролле
         function isElementInViewport(el) {
