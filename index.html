@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODAM — Продай авто как дилер</title>
+    <style>
+        /* ===== СБРОС И БАЗОВЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+            color: #1a2639;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            font-size: 36px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2b3a67, #3a4f8c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #2d3e6f;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav a:hover {
+            color: #1e2b4f;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3a4f8c;
+            transition: width 0.3s;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* переключатель языка */
+        .lang-switch {
+            display: flex;
+            gap: 5px;
+            background: rgba(255,255,255,0.5);
+            padding: 4px;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+        .lang-btn {
+            border: none;
+            background: transparent;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #2d3e6f;
+        }
+        .lang-btn.active {
+            background: #2b3a67;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2b3a67, #3a4f8c);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(42, 65, 112, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(42, 65, 112, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2b3a67;
+            color: #2b3a67;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: #2b3a67;
+            color: white;
+        }
+
+        /* ===== ГЕРОЙ ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            padding: 60px 0;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1e2b4f, #2b3a67);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #4a5568;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e2b4f;
+        }
+
+        .stat-item p {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 0;
+        }
+
+        .hero-image {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s;
+        }
+
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* ===== КАК ЭТО РАБОТАЕТ ===== */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a2639;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #718096;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .step-card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            border: 1px solid rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #2b3a67, #5a7bb9);
+            transform: translateX(-100%);
+            transition: transform 0.4s;
+        }
+
+        .step-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(42, 65, 112, 0.2);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2b3a67, #3a4f8c);
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .step-card p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        /* ===== ПРЕИМУЩЕСТВА ===== */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature-card.visible {
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(42, 65, 112, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: linear-gradient(135deg, #2b3a67, #3a4f8c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #718096;
+        }
+
+        /* ===== ТАРИФЫ ===== */
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.03);
+            border-color: #2b3a67;
+            box-shadow: 0 25px 50px rgba(42, 65, 112, 0.2);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid #3a4f8c;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.popular::before {
+            content: '🔥 Самы папулярны';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: #3a4f8c;
+            color: white;
+            padding: 8px 40px;
+            font-size: 12px;
+            font-weight: 600;
+            transform: rotate(45deg);
+            white-space: nowrap;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #1e2b4f;
+            margin-bottom: 5px;
+        }
+
+        .price small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #718096;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #edf2f7;
+            color: #4a5568;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            background: linear-gradient(135deg, #1e2b4f, #2b3a67);
+            border-radius: 30px;
+            padding: 80px 60px;
+            text-align: center;
+            color: white;
+            margin: 60px 0;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: white;
+            color: #1e2b4f;
+            font-size: 18px;
+            padding: 16px 48px;
+        }
+
+        .cta .btn:hover {
+            background: #f0f4ff;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid #d0d9e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #4a5568;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #1e2b4f;
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 38px;
+            }
+            .steps, .features, .pricing {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav {
+                justify-content: center;
+            }
+            .steps, .features, .pricing {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            .cta {
+                padding: 40px 20px;
+            }
+            .cta h2 {
+                font-size: 30px;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        [data-lang="be"] .lang-ru,
+        [data-lang="ru"] .lang-be {
+            display: none;
+        }
+        [data-lang="ru"] .lang-ru,
+        [data-lang="be"] .lang-be {
+            display: inline-block;
+        }
+        .lang-be, .lang-ru {
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body data-lang="ru">
+    <div class="container">
+        <!-- ШАПКА -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🚗</span>
+                <h1>PRODAM</h1>
+            </div>
+            <nav class="nav">
+                <a href="#how" class="lang-ru">Как это работает</a>
+                <a href="#how" class="lang-be">Як гэта працуе</a>
+                <a href="#features" class="lang-ru">Преимущества</a>
+                <a href="#features" class="lang-be">Перавагі</a>
+                <a href="#pricing" class="lang-ru">Тарифы</a>
+                <a href="#pricing" class="lang-be">Тарифы</a>
+                <a href="#contacts" class="lang-ru">Контакты</a>
+                <a href="#contacts" class="lang-be">Кантакты</a>
+                <div class="lang-switch">
+                    <button class="lang-btn" data-lang="ru">Рус</button>
+                    <button class="lang-btn" data-lang="be">Бел</button>
+                </div>
+            </nav>
+            <a href="#" class="btn-outline btn lang-ru">Войти</a>
+            <a href="#" class="btn-outline btn lang-be">Увайсці</a>
+        </header>
+
+        <!-- ГЕРОЙ -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="lang-ru">Продай авто как дилер<br>без опыта и хлопот</h2>
+                <h2 class="lang-be">Продай аўто як дылер<br>без досведу і клопату</h2>
+                <p class="lang-ru">AI-ассистент сделает идеальное объявление, разместит на 5 площадках и ответит на звонки. Вы просто получаете деньги.</p>
+                <p class="lang-be">AI-асістэнт зробіць ідэальнае абʼяву, размясціць на 5 пляцоўках і адкажа на званкі. Вы проста атрымліваеце грошы.</p>
+                <a href="#" class="btn lang-ru">Начать бесплатно</a>
+                <a href="#" class="btn lang-be">Пачаць бясплатна</a>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>250+</h3>
+                        <p class="lang-ru">авто продано</p>
+                        <p class="lang-be">аўто прададзена</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>4.9</h3>
+                        <p class="lang-ru">рейтинг пользователей</p>
+                        <p class="lang-be">рэйтынг карыстальнікаў</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>15%</h3>
+                        <p class="lang-ru">дороже продажа</p>
+                        <p class="lang-be">даражэйшая продаж</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'%3E%3Crect width='500' height='400' fill='%23e0e7ff' rx='20'/%3E%3Ctext x='50' y='200' font-family='Arial' font-size='24' fill='%233a4f8c'%3E📱 Интерфейс PRODAM%3C/text%3E%3C/svg%3E"
+                     alt="Интерфейс PRODAM">
+            </div>
+        </section>
+
+        <!-- КАК ЭТО РАБОТАЕТ -->
+        <section id="how" class="section">
+            <h2 class="section-title lang-ru">Как это работает?</h2>
+            <h2 class="section-title lang-be">Як гэта працуе?</h2>
+            <p class="section-subtitle lang-ru">3 минуты — и ваше авто готово к продаже</p>
+            <p class="section-subtitle lang-be">3 хвіліны — і ваша аўто гатова да продажу</p>
+            <div class="steps">
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <h3 class="lang-ru">Введите данные</h3>
+                    <h3 class="lang-be">Увядзіце даныя</h3>
+                    <p class="lang-ru">Марка, модель, год, состояние. Это займёт 3 минуты.</p>
+                    <p class="lang-be">Марка, мадэль, год, стан. Гэта займае 3 хвіліны.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <h3 class="lang-ru">AI создаст контент</h3>
+                    <h3 class="lang-be">AI створыць кантэнт</h3>
+                    <p class="lang-ru">Текст, фото-гайд, список минусов — всё само.</p>
+                    <p class="lang-be">Тэкст, фота-гайд, спіс мінусаў — усё само.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <h3 class="lang-ru">Одна кнопка публикации</h3>
+                    <h3 class="lang-be">Адна кнопка публікацыі</h3>
+                    <p class="lang-ru">ABW, Onliner, Kufar, Telegram, VK — сразу везде.</p>
+                    <p class="lang-be">ABW, Onliner, Kufar, Telegram, VK — адразу ўсюды.</p>
+                </div>
+                <div class="step-card animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <h3 class="lang-ru">AI отвечает за вас</h3>
+                    <h3 class="lang-be">AI адказвае за вас</h3>
+                    <p class="lang-ru">Чат-бот отсеет перекупов и даст контакты реальных покупателей.</p>
+                    <p class="lang-be">Чат-бот адсеіць перакупаў і дасць кантакты рэальных пакупнікоў.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПРЕИМУЩЕСТВА -->
+        <section id="features" class="section">
+            <h2 class="section-title lang-ru">Почему PRODAM?</h2>
+            <h2 class="section-title lang-be">Чаму PRODAM?</h2>
+            <p class="section-subtitle lang-ru">Мы сделали всё, чтобы вы продали машину быстро и дорого</p>
+            <p class="section-subtitle lang-be">Мы зрабілі ўсё, каб вы прадалі машыну хутка і дорага</p>
+            <div class="features">
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="lang-ru">Нейросеть пишет текст</h3>
+                    <h3 class="lang-be">Нейрасетка піша тэкст</h3>
+                    <p class="lang-ru">3 варианта: сухой, эмоциональный, технический. Для каждой модели свои фишки.</p>
+                    <p class="lang-be">3 варыянты на выбар: сухі, эмацыйны, тэхнічны. Для кожнай мадэлі свае фішкі.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">📸</span>
+                    <h3 class="lang-ru">Гайд по фото</h3>
+                    <h3 class="lang-be">Гайд па фота</h3>
+                    <p class="lang-ru">Пошаговая инструкция: "отойди на 3 метра, присядь, сфотографируй этот ракурс".</p>
+                    <p class="lang-be">Пакрокавая інструкцыя: "адыйдзі на 3 метры, прысядзь, сфатаграфуй гэты ракурс".</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">🛡️</span>
+                    <h3 class="lang-ru">Честные минусы</h3>
+                    <h3 class="lang-be">Чэсныя мінусы</h3>
+                    <p class="lang-ru">Не дадим перекупам сбить цену — сразу покажите реальное состояние.</p>
+                    <p class="lang-be">Не дамо перакупам збіць цану — адразу пакажыце рэальны стан.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">📢</span>
+                    <h3 class="lang-ru">Автопостинг</h3>
+                    <h3 class="lang-be">Аўтапостынг</h3>
+                    <p class="lang-ru">Одна кнопка — и объявление на ABW, Onliner, Kufar, AV.BY, в Telegram и VK.</p>
+                    <p class="lang-be">Адна кнопка — і аб'ява на ABW, Onliner, Kufar, AV.BY, у Telegram і VK.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">💬</span>
+                    <h3 class="lang-ru">AI-ассистент</h3>
+                    <h3 class="lang-be">AI-асістэнт</h3>
+                    <p class="lang-ru">Отвечает на вопросы в Viber, Telegram, отсеивает "салам алейкум, обменяюсь".</p>
+                    <p class="lang-be">Адказвае на пытанні ў Viber, Telegram, адсявае "салам алейкум, памяняюся".</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="lang-ru">Аналитика</h3>
+                    <h3 class="lang-be">Аналітыка</h3>
+                    <p class="lang-ru">Видите, сколько людей смотрели, добавили в избранное, когда снизить цену.</p>
+                    <p class="lang-be">Бачыце, колькі людзей глядзелі, дадалі ў абранае, калі панізіць цану.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ТАРИФЫ -->
+        <section id="pricing" class="section">
+            <h2 class="section-title lang-ru">Тарифы</h2>
+            <h2 class="section-title lang-be">Тарифы</h2>
+            <p class="section-subtitle lang-ru">Выберите план, который подходит именно вам</p>
+            <p class="section-subtitle lang-be">Абярыце план, які падыходзіць менавіта вам</p>
+            <div class="pricing">
+                <div class="pricing-card animate-on-scroll">
+                    <h3>Free</h3>
+                    <div class="price">0 <small>BYN</small></div>
+                    <ul class="pricing-features">
+                        <li class="lang-ru">Генерация текста</li>
+                        <li class="lang-be">Генерацыя тэксту</li>
+                        <li class="lang-ru">Чек-лист фото</li>
+                        <li class="lang-be">Чэк-ліст фота</li>
+                        <li class="lang-ru">1 площадка на выбор</li>
+                        <li class="lang-be">1 пляцоўка на выбар</li>
+                        <li>—</li>
+                        <li>—</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn lang-ru">Начать</a>
+                    <a href="#" class="btn-outline btn lang-be">Пачаць</a>
+                </div>
+                <div class="pricing-card popular animate-on-scroll">
+                    <h3>Standard</h3>
+                    <div class="price">29 <small>BYN</small></div>
+                    <ul class="pricing-features">
+                        <li class="lang-ru">Всё из Free</li>
+                        <li class="lang-be">Усё з Free</li>
+                        <li class="lang-ru">5 площадок</li>
+                        <li class="lang-be">5 пляцовак</li>
+                        <li class="lang-ru">Честные минусы</li>
+                        <li class="lang-be">Чэсныя мінусы</li>
+                        <li class="lang-ru">Статистика просмотров</li>
+                        <li class="lang-be">Статыстыка праглядаў</li>
+                    </ul>
+                    <a href="#" class="btn lang-ru">Выбрать</a>
+                    <a href="#" class="btn lang-be">Абраць</a>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <h3>Premium</h3>
+                    <div class="price">59 <small>BYN</small></div>
+                    <ul class="pricing-features">
+                        <li class="lang-ru">Всё из Standard</li>
+                        <li class="lang-be">Усё са Standard</li>
+                        <li class="lang-ru">AI-ассистент 24/7</li>
+                        <li class="lang-be">AI-асістэнт 24/7</li>
+                        <li class="lang-ru">Анализ рынка</li>
+                        <li class="lang-be">Аналіз рынку</li>
+                        <li class="lang-ru">Рекомендация цены</li>
+                        <li class="lang-be">Рэкамендацыя цэн</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn lang-ru">Выбрать</a>
+                    <a href="#" class="btn-outline btn lang-be">Абраць</a>
+                </div>
+                <div class="pricing-card animate-on-scroll">
+                    <h3>VIP</h3>
+                    <div class="price">149 <small>BYN</small></div>
+                    <ul class="pricing-features">
+                        <li class="lang-ru">Пакет на 10 авто</li>
+                        <li class="lang-be">Пакет на 10 аўто</li>
+                        <li class="lang-ru">Мультиаккаунтинг</li>
+                        <li class="lang-be">Мультыакаўнтынг</li>
+                        <li class="lang-ru">Загрузка по FTP</li>
+                        <li class="lang-be">Загрузка па FTP</li>
+                        <li class="lang-ru">API доступ</li>
+                        <li class="lang-be">API доступ</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn lang-ru">Выбрать</a>
+                    <a href="#" class="btn-outline btn lang-be">Абраць</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta animate-on-scroll">
+            <h2 class="lang-ru">Получите первое объявление бесплатно</h2>
+            <h2 class="lang-be">Атрымайце першае абʼяву бясплатна</h2>
+            <p class="lang-ru">Прямо сейчас — без оплаты, без карты, без телефона. Попробуйте, как это просто.</p>
+            <p class="lang-be">Проста зараз — без аплаты, без карты, без тэлефона. Паспрабуйце, як гэта проста.</p>
+            <a href="#" class="btn lang-ru">Создать объявление</a>
+            <a href="#" class="btn lang-be">Стварыць абʼяву</a>
+        </section>
+
+        <!-- ФУТЕР -->
+        <footer class="footer" id="contacts">
+            <div class="logo">
+                <span class="logo-icon">🚗</span>
+                <h1>PRODAM</h1>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="lang-ru">О нас</a>
+                <a href="#" class="lang-be">Пра нас</a>
+                <a href="#" class="lang-ru">Помощь</a>
+                <a href="#" class="lang-be">Дапамога</a>
+                <a href="#" class="lang-ru">Договор оферты</a>
+                <a href="#" class="lang-be">Дагавор аферты</a>
+                <a href="#" class="lang-ru">Контакты</a>
+                <a href="#" class="lang-be">Кантакты</a>
+            </div>
+            <div class="lang-ru">© 2026 PRODAM. Все права защищены.</div>
+            <div class="lang-be">© 2026 PRODAM. Усе правы абаронены.</div>
+        </footer>
+    </div>
+
+    <!-- СКРИПТ -->
+    <script>
+        // Переключение языка
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const root = document.documentElement;
+
+        function setLanguage(lang) {
+            root.setAttribute('data-lang', lang);
+            // обновить активный класс на кнопках
+            langBtns.forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            localStorage.setItem('prodam-lang', lang);
+        }
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLanguage(btn.dataset.lang);
+            });
+        });
+
+        // загрузить сохранённый язык
+        const savedLang = localStorage.getItem('prodam-lang') || 'ru';
+        setLanguage(savedLang);
+
+        // анимации при скролле
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 &&
+                rect.bottom >= 0
+            );
+        }
+
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(el => {
+                if (isElementInViewport(el)) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', handleScrollAnimations);
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', function() {
+            setTimeout(handleScrollAnimations, 200);
+        });
+    </script>
+</body>
+</html>
